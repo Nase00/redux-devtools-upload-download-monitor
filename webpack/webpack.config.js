@@ -32,5 +32,11 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
+  },
+  externals: {
+    react: "react",
+    "prop-types": "prop-types",
+    "redux-devtools": "redux-devtools",
+    filesize: "filesize"
   }
 };

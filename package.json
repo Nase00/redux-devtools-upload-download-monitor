@@ -1,8 +1,8 @@
 {
   "name": "redux-devtools-upload-download-monitor",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A monitor for Redux DevTools to enable uploading and downloading of serialized application states.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack/webpack.config.dev.js",
     "build": "webpack --config ./webpack/webpack.config.js"
