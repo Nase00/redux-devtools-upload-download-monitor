@@ -1,3 +1,5 @@
+[![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/redux-devtools-upload-download-monitor)
+
 # Redux DevTools Upload/Download Monitor
 
 A monitor for [Redux DevTools](https://github.com/gaearon/redux-devtools) to enable uploading and downloading of serialized application states.
