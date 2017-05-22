@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ActionCreators } from "redux-devtools";
-import { Button, Notification } from "devui";
 import filesize from "filesize";
 
 import reducer from "./reducer";
@@ -38,7 +37,7 @@ class UploadDownloadMonitor extends Component {
     this.getFileInputEl().addEventListener("change", this.handleFiles, false);
   }
 
-  getFileInputEl = () => document.getElementById("upload-file");
+  getFileInputEl = () => document.getElementById("file-upload");
 
   handleFiles() {
     const fileReader = new FileReader();
@@ -72,36 +71,61 @@ class UploadDownloadMonitor extends Component {
   });
 
   renderFileError = () => (
-    <Notification type="error">
-      Error parsing file. Please upload a valid application state
-    </Notification>
+    <div style={styles.error}>
+      Error parsing file, please upload a valid application state
+    </div>
   );
 
   renderFileSuccess = () => (
-    <Notification type="success">
+    <div style={styles.success}>
       State successfully uploaded and imported into application
-    </Notification>
+    </div>
   );
 
   render() {
     const stringifiedAppState = JSON.stringify(this.getAppState());
-    const fileLink = `data: text/json;charset=utf-8, ${encodeURIComponent(stringifiedAppState)}`;
+    const fileLink = `data:text/json;charset=utf-8, ${encodeURIComponent(stringifiedAppState)}`;
     const genFileName = () => `${document.title || "app"}-state.json`;
+    const promptDownload = () => this.refs.fileDownload.click();
+    const promptUpload = () => this.refs.fileUpload.click();
+
+    const resetNotifications = () =>
+      this.setState({
+        fileError: false,
+        fileSuccess: false
+      });
 
     return (
-      <div style={styles.base}>
-        Size of current application state:
-        <h1>
+      <div style={styles.base} onClick={resetNotifications}>
+        <span style={styles.header}>Current state filesize</span>
+        <span style={styles.fileSize}>
           {filesize(stringifiedAppState.length)}
-        </h1>
+        </span>
         {this.state.fileError ? this.renderFileError() : null}
         {this.state.fileSuccess ? this.renderFileSuccess() : null}
-        <div>
-          <a href={fileLink} download={genFileName()}>
-            Download
-          </a>
+        <div style={styles.buttonsContainer}>
+          <div style={styles.buttonDownload} onClick={promptDownload}>
+            <label htmlFor="file-download">
+              Download
+            </label>
+            <a
+              ref="fileDownload"
+              id="file-download"
+              href={fileLink}
+              download={genFileName()}
+              style={styles.hidden}
+            />
+          </div>
+          <div style={styles.buttonUpload} onClick={promptUpload}>
+            <label htmlFor="file-upload">Upload</label>
+            <input
+              ref="fileUpload"
+              id="file-upload"
+              type="file"
+              style={styles.hidden}
+            />
+          </div>
         </div>
-        <input id="upload-file" type="file" />
       </div>
     );
   }

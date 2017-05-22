@@ -12,7 +12,8 @@ module.exports = {
   output: {
     libraryTarget: "commonjs2",
     library: "UploadDownloadMonitor",
-    path: path.resolve(__dirname, "../dist")
+    path: path.resolve(__dirname, "../dist"),
+    filename: "index.js"
   },
   target: "node",
   resolve: {
