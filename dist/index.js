@@ -83,68 +83,101 @@ var reducer = function reducer(state) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return base; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return header; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return fileSize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return wrapper; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return base; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return child; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return header; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fileSize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return error; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return success; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return buttonsContainer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return buttonUpload; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return buttonDownload; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return hidden; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return buttonsContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return buttonUpload; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return buttonDownload; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return hidden; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return clickThrough; });
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var WHITE = "#FFFFFF";
-var LIGHT_GREY = "#B0B0B0";
+var LIGHT_GREY = "#FBFCFF";
 var DARK_GREY = "#2A2F3A";
-var PUKE_GREEN = "#A1C659";
+var CYAN = "#2BAAD8";
+var DARK_BLUE = "#274156";
 
-var base = {
-  textAlign: "center",
-  textTransform: "uppercase",
-  background: DARK_GREY,
-  padding: "20px 0",
-  fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+var wrapper = {
+  position: "relative",
   height: "100%",
-  color: WHITE
+  width: "100%"
+};
+
+var base = function base(_ref) {
+  var children = _ref.children;
+  return {
+    position: "absolute",
+    display: "inline-block",
+    textAlign: "center",
+    textTransform: "uppercase",
+    background: DARK_GREY,
+    fontFamily: 'monaco, Consolas, "Lucida Console", monospace',
+    width: children ? "20%" : "100%",
+    height: "100%",
+    color: WHITE,
+    border: "none"
+  };
+};
+
+var child = {
+  position: "absolute",
+  height: "100%",
+  width: "80%",
+  display: "inline-block",
+  left: "20%",
+  top: "0",
+  border: "none"
 };
 
 var header = {
-  display: "block"
+  margin: "8px 0 0",
+  display: "block",
+  fontSize: "12px"
 };
 
 var fileSize = {
   margin: "10px 0",
-  fontSize: "22px",
+  fontSize: "24px",
   display: "block",
-  color: PUKE_GREEN,
+  color: CYAN,
   textTransform: "initial",
   fontFamily: "monospace"
 };
 
 var notification = {
+  margin: "4px 0 0",
   color: "#FFFFFF",
-  padding: "10px"
+  padding: "2px",
+  fontSize: "10px"
 };
 
-var error = _extends({ background: "#FF0000" }, notification);
-var success = _extends({ background: "#00FF00" }, notification);
+var error = _extends({ background: "#9A031E" }, notification);
+var success = _extends({ background: "#6BAB90" }, notification);
 
 var buttonsContainer = {
-  padding: "0 10px 10px"
+  padding: "0 10px"
 };
 
 var button = {
-  margin: "0 8px 8px",
+  margin: "0 8px 4px",
   padding: "10px",
+  background: DARK_BLUE,
+  color: LIGHT_GREY,
   border: "1px solid " + LIGHT_GREY,
-  borderRadius: "10px",
-  fontFamily: "Arial"
+  fontFamily: "Arial",
+  fontSize: "14px"
 };
 var buttonUpload = _extends({}, button);
 var buttonDownload = _extends({}, button);
 
 var hidden = { display: "none" };
+var clickThrough = { pointerEvents: "none" };
 
 /***/ }),
 /* 2 */
@@ -186,6 +219,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_filesize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_filesize__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reducer__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(1);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -247,6 +282,7 @@ var UploadDownloadMonitor = function (_Component) {
       fileError: false
     };
 
+    _this.validateChildren = _this.validateChildren.bind(_this);
     _this.handleFiles = _this.handleFiles.bind(_this);
     return _this;
   }
@@ -255,6 +291,20 @@ var UploadDownloadMonitor = function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getFileInputEl().addEventListener("change", this.handleFiles, false);
+
+      this.validateChildren();
+    }
+  }, {
+    key: "validateChildren",
+    value: function validateChildren() {
+      var children = this.props.children;
+
+
+      var isValid = !children || children.type.name === "SliderMonitor";
+
+      if (!isValid) {
+        console.warn("UploadDownloadMonitor was passed a child other than SliderMonitor. This may cause problems!");
+      }
     }
   }, {
     key: "handleFiles",
@@ -265,9 +315,9 @@ var UploadDownloadMonitor = function (_Component) {
 
       fileReader.onload = function (evt) {
         var originalAppState = _this2.getAppState();
-        var newAppState = JSON.parse(evt.target.result);
 
         try {
+          var newAppState = JSON.parse(evt.target.result);
           _this2.setState({ fileError: false, fileSuccess: true });
           _this2.props.dispatch(__WEBPACK_IMPORTED_MODULE_2_redux_devtools__["ActionCreators"].importState(newAppState));
         } catch (e) {
@@ -280,79 +330,107 @@ var UploadDownloadMonitor = function (_Component) {
       fileReader.readAsText(file);
     }
   }, {
+    key: "renderInfo",
+    value: function renderInfo(stringifiedAppState) {
+      var appStateFilesize = __WEBPACK_IMPORTED_MODULE_3_filesize___default()(stringifiedAppState.length);
+      var _state = this.state,
+          fileError = _state.fileError,
+          fileSuccess = _state.fileSuccess;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "span",
+        { style: __WEBPACK_IMPORTED_MODULE_5__styles__["c" /* fileSize */] },
+        fileError ? this.renderFileError() : null,
+        fileSuccess ? this.renderFileSuccess() : null,
+        !(fileError || fileSuccess) ? appStateFilesize : null
+      );
+    }
+  }, {
+    key: "renderChildren",
+    value: function renderChildren() {
+      var _this3 = this;
+
+      var cloneChild = function cloneChild(child) {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_react__["cloneElement"])(child, _extends({}, _this3.props));
+      };
+      var childrenWithProps = __WEBPACK_IMPORTED_MODULE_0_react__["Children"].map(this.props.children, cloneChild);
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "div",
+        { style: __WEBPACK_IMPORTED_MODULE_5__styles__["d" /* child */] },
+        childrenWithProps
+      );
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var stringifiedAppState = JSON.stringify(this.getAppState());
       var fileLink = "data:text/json;charset=utf-8, " + encodeURIComponent(stringifiedAppState);
+
       var genFileName = function genFileName() {
         return (document.title || "app") + "-state.json";
       };
       var promptDownload = function promptDownload() {
-        return _this3.refs.fileDownload.click();
+        return _this4.refs.fileDownload.click();
       };
       var promptUpload = function promptUpload() {
-        return _this3.refs.fileUpload.click();
+        return _this4.refs.fileUpload.click();
       };
-
       var resetNotifications = function resetNotifications() {
-        return _this3.setState({
-          fileError: false,
-          fileSuccess: false
-        });
+        return _this4.setState({ fileError: false, fileSuccess: false });
       };
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
-        { style: __WEBPACK_IMPORTED_MODULE_5__styles__["c" /* base */], onClick: resetNotifications },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "span",
-          { style: __WEBPACK_IMPORTED_MODULE_5__styles__["d" /* header */] },
-          "Current state filesize"
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "span",
-          { style: __WEBPACK_IMPORTED_MODULE_5__styles__["e" /* fileSize */] },
-          __WEBPACK_IMPORTED_MODULE_3_filesize___default()(stringifiedAppState.length)
-        ),
-        this.state.fileError ? this.renderFileError() : null,
-        this.state.fileSuccess ? this.renderFileSuccess() : null,
+        { style: __WEBPACK_IMPORTED_MODULE_5__styles__["e" /* wrapper */] },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           "div",
-          { style: __WEBPACK_IMPORTED_MODULE_5__styles__["f" /* buttonsContainer */] },
+          { style: __WEBPACK_IMPORTED_MODULE_5__styles__["f" /* base */](this.props), onClick: resetNotifications },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { style: __WEBPACK_IMPORTED_MODULE_5__styles__["g" /* buttonDownload */], onClick: promptDownload },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "label",
-              { htmlFor: "file-download" },
-              "Download"
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
-              ref: "fileDownload",
-              id: "file-download",
-              href: fileLink,
-              download: genFileName(),
-              style: __WEBPACK_IMPORTED_MODULE_5__styles__["h" /* hidden */]
-            })
+            "span",
+            { style: __WEBPACK_IMPORTED_MODULE_5__styles__["g" /* header */] },
+            "Current state filesize"
           ),
+          this.renderInfo(stringifiedAppState),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
-            { style: __WEBPACK_IMPORTED_MODULE_5__styles__["i" /* buttonUpload */], onClick: promptUpload },
+            { style: __WEBPACK_IMPORTED_MODULE_5__styles__["h" /* buttonsContainer */] },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "label",
-              { htmlFor: "file-upload" },
-              "Upload"
+              "div",
+              { style: __WEBPACK_IMPORTED_MODULE_5__styles__["i" /* buttonDownload */], onClick: promptDownload },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "label",
+                { htmlFor: "file-download" },
+                "Download"
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+                ref: "fileDownload",
+                id: "file-download",
+                href: fileLink,
+                download: genFileName(),
+                style: __WEBPACK_IMPORTED_MODULE_5__styles__["j" /* hidden */]
+              })
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-              ref: "fileUpload",
-              id: "file-upload",
-              type: "file",
-              style: __WEBPACK_IMPORTED_MODULE_5__styles__["h" /* hidden */]
-            })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { style: __WEBPACK_IMPORTED_MODULE_5__styles__["k" /* buttonUpload */], onClick: promptUpload },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "label",
+                { htmlFor: "file-upload", style: __WEBPACK_IMPORTED_MODULE_5__styles__["l" /* clickThrough */] },
+                "Upload"
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+                ref: "fileUpload",
+                id: "file-upload",
+                type: "file",
+                style: __WEBPACK_IMPORTED_MODULE_5__styles__["j" /* hidden */]
+              })
+            )
           )
-        )
+        ),
+        this.props.children ? this.renderChildren() : null
       );
     }
   }]);

@@ -2,7 +2,7 @@
 
 # Redux DevTools Upload/Download Monitor
 
-![Demonstration with Redux DevTools Slider Monitor](./demo.gif)
+![Demonstration with Redux DevTools Slider Monitor](https://github.com/Nase00/redux-devtools-upload-download-monitor/raw/master/demo.gif)
 
 A monitor for [Redux DevTools](https://github.com/gaearon/redux-devtools) to enable uploading and downloading of serialized application states. Pairs well with [Redux Slider Slider Monitor](https://github.com/calesce/redux-slider-monitor)! (Shown bottom-right.) See "Usage" below.
 
