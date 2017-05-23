@@ -30,7 +30,6 @@ module.exports = {
   ],
   module: base.module,
   devtool: "eval-source-map",
-  externals: base.externals,
   devServer: {
     contentBase: path.join(__dirname, "../demo"),
     publicPath: "/",

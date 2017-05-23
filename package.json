@@ -17,7 +17,6 @@
     "babel-preset-env": "^1.5.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^3.19.0",
-    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
@@ -35,6 +34,7 @@
     "redux-devtools": "^3.4.0"
   },
   "dependencies": {
-    "filesize": "^3.5.10"
+    "filesize": "^3.5.10",
+    "prop-types": "^15.5.10"
   }
 }

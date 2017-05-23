@@ -8,14 +8,18 @@ import UploadDownloadMonitor from "../src";
 
 const DevTools = createDevTools(
   <DockMonitor
+    fluid={false}
+    defaultSize={170}
     defaultIsVisible={true}
+    defaultPosition="bottom"
     toggleVisibilityKey="ctrl-q"
     changeMonitorKey="ctrl-w"
     changePositionKey="ctrl-e"
   >
-    <UploadDownloadMonitor />
+    <UploadDownloadMonitor>
+      <SliderMonitor />
+    </UploadDownloadMonitor>
     <LogMonitor />
-    <SliderMonitor />
   </DockMonitor>
 );
 

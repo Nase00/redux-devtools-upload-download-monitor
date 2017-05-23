@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Children, cloneElement } from "react";
 import PropTypes from "prop-types";
 import { ActionCreators } from "redux-devtools";
 import filesize from "filesize";
@@ -30,11 +30,26 @@ class UploadDownloadMonitor extends Component {
       fileError: false
     };
 
+    this.validateChildren = this.validateChildren.bind(this);
     this.handleFiles = this.handleFiles.bind(this);
   }
 
   componentDidMount() {
     this.getFileInputEl().addEventListener("change", this.handleFiles, false);
+
+    this.validateChildren();
+  }
+
+  validateChildren() {
+    const { children } = this.props;
+
+    const isValid = !children || children.type.name === "SliderMonitor";
+
+    if (!isValid) {
+      console.warn(
+        "UploadDownloadMonitor was passed a child other than SliderMonitor. This may cause problems!"
+      );
+    }
   }
 
   getFileInputEl = () => document.getElementById("file-upload");
@@ -44,9 +59,9 @@ class UploadDownloadMonitor extends Component {
 
     fileReader.onload = evt => {
       const originalAppState = this.getAppState();
-      const newAppState = JSON.parse(evt.target.result);
 
       try {
+        const newAppState = JSON.parse(evt.target.result);
         this.setState({ fileError: false, fileSuccess: true });
         this.props.dispatch(ActionCreators.importState(newAppState));
       } catch (e) {
@@ -82,50 +97,67 @@ class UploadDownloadMonitor extends Component {
     </div>
   );
 
+  renderInfo(stringifiedAppState) {
+    const appStateFilesize = filesize(stringifiedAppState.length);
+    const { fileError, fileSuccess } = this.state;
+    return (
+      <span style={styles.fileSize}>
+        {fileError ? this.renderFileError() : null}
+        {fileSuccess ? this.renderFileSuccess() : null}
+        {!(fileError || fileSuccess) ? appStateFilesize : null}
+      </span>
+    );
+  }
+
+  renderChildren() {
+    const cloneChild = child => cloneElement(child, { ...this.props });
+    const childrenWithProps = Children.map(this.props.children, cloneChild);
+
+    return <div style={styles.child}>{childrenWithProps}</div>;
+  }
+
   render() {
     const stringifiedAppState = JSON.stringify(this.getAppState());
     const fileLink = `data:text/json;charset=utf-8, ${encodeURIComponent(stringifiedAppState)}`;
+
     const genFileName = () => `${document.title || "app"}-state.json`;
     const promptDownload = () => this.refs.fileDownload.click();
     const promptUpload = () => this.refs.fileUpload.click();
-
     const resetNotifications = () =>
-      this.setState({
-        fileError: false,
-        fileSuccess: false
-      });
+      this.setState({ fileError: false, fileSuccess: false });
 
     return (
-      <div style={styles.base} onClick={resetNotifications}>
-        <span style={styles.header}>Current state filesize</span>
-        <span style={styles.fileSize}>
-          {filesize(stringifiedAppState.length)}
-        </span>
-        {this.state.fileError ? this.renderFileError() : null}
-        {this.state.fileSuccess ? this.renderFileSuccess() : null}
-        <div style={styles.buttonsContainer}>
-          <div style={styles.buttonDownload} onClick={promptDownload}>
-            <label htmlFor="file-download">
-              Download
-            </label>
-            <a
-              ref="fileDownload"
-              id="file-download"
-              href={fileLink}
-              download={genFileName()}
-              style={styles.hidden}
-            />
-          </div>
-          <div style={styles.buttonUpload} onClick={promptUpload}>
-            <label htmlFor="file-upload">Upload</label>
-            <input
-              ref="fileUpload"
-              id="file-upload"
-              type="file"
-              style={styles.hidden}
-            />
+      <div style={styles.wrapper}>
+        <div style={styles.base(this.props)} onClick={resetNotifications}>
+          <span style={styles.header}>Current state filesize</span>
+          {this.renderInfo(stringifiedAppState)}
+          <div style={styles.buttonsContainer}>
+            <div style={styles.buttonDownload} onClick={promptDownload}>
+              <label htmlFor="file-download">
+                Download
+              </label>
+              <a
+                ref="fileDownload"
+                id="file-download"
+                href={fileLink}
+                download={genFileName()}
+                style={styles.hidden}
+              />
+            </div>
+            <div style={styles.buttonUpload} onClick={promptUpload}>
+              <label htmlFor="file-upload" style={styles.clickThrough}>
+                Upload
+              </label>
+              <input
+                ref="fileUpload"
+                id="file-upload"
+                type="file"
+                style={styles.hidden}
+              />
+            </div>
           </div>
         </div>
+        {this.props.children ? this.renderChildren() : null}
       </div>
     );
   }
