@@ -9,6 +9,10 @@
   },
   "author": "Sean Owiecki",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nase00/redux-devtools-upload-download-monitor"
+  },
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
