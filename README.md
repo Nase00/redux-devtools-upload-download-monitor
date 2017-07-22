@@ -31,7 +31,7 @@ export default createDevTools(
   <UploadDownloadMonitor />
 );
 ```
-You can also pass [SliderMonitor](https://github.com/calesce/redux-slider-monitor) as a child to display both side-by-side! If you're using to assist in reproducing bugs on a team project, I recommend a configuration like this:
+You can also pass [SliderMonitor](https://github.com/calesce/redux-slider-monitor) as a child to display both side-by-side! If you're using this tool to assist in reproducing bugs on a team project, I recommend a configuration like this:
 ```js
 <DockMonitor
   fluid={false}
