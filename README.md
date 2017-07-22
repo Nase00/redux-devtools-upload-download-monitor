@@ -15,9 +15,10 @@ Like most Redux DevTools monitors, this tool works best if *as much as possible*
 
 # Installation
 ```bash
-yarn add --dev redux-devtools-upload-download-monitor
-# Or, if using NPM:
+# If using NPM:
 npm install --save-dev redux-devtools-upload-download-monitor
+# If using Yarn:
+yarn add --dev redux-devtools-upload-download-monitor
 ```
 
 # Usage
@@ -44,5 +45,5 @@ You can also pass [SliderMonitor](https://github.com/calesce/redux-slider-monito
 
 # Development
 ```bash
-yarn start # Open http://localhost:8080 for a demo page utilizing the monitor from ./src
+npm start # Open http://localhost:8080 for a demo page utilizing the monitor from ./src
 ```
